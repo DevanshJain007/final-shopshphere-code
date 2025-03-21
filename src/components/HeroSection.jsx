@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { Button } from "@/components/ui/button";
 import shopshphere from '../assets/shopsphere.png'
+import storeInLocalStorage from "../components/storeLocalStorage";
 const HeroSection = () => {
+  // useEffect(()=>{storeInLocalStorage('login','false')},[])
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-900 dark:to-gray-800">
       <div className="container px-4 md:px-6">

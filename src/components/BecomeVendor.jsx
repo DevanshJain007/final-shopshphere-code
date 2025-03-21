@@ -99,59 +99,66 @@ const Page3 = ({vendor,setVendor}) => (
 const Page4 = ({ vendor }) => {
     const { setVendorApplication, vendorApplication } = useContext(VendorContext);
     const navigate = useNavigate();
-    const handleSubmmit = (vendor) => {
+
+    const handleSubmit = (vendor) => {
         console.log(vendor);
-        setVendorApplication([...vendorApplication, vendor]);
-        navigate('/admin')
+        const updatedData = [...(vendorApplication || []), vendor];
+        setVendorApplication(updatedData);
+        localStorage.setItem('vendordata', JSON.stringify(updatedData));
     };
-    
+
+    if (!vendor) {
+        return <p>Loading...</p>;
+    }
+
     return (
+        <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">Review & Submit</h2>
+            <p className="text-gray-500 mb-6">Review your information before submitting</p>
 
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Review & Submit</h2>
-        <p className="text-gray-500 mb-6">Review your information before submitting</p>
-
-        {/* Personal Information */}
-        <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">Personal Information</h3>
-            <div className="grid grid-cols-2 gap-4 text-gray-600">
-                <p><span className="font-medium">First Name:</span> {vendor.fname}</p>
-                <p><span className="font-medium">Last Name:</span> {vendor.lname}</p>
-                <p><span className="font-medium">Email:</span> {vendor.email}</p>
-                <p><span className="font-medium">Phone No:</span> {vendor.phoneNo}</p>
-                <p><span className="font-medium">Password:</span> {vendor.pass}</p>
+            {/* Personal Information */}
+            <div className="mb-6">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Personal Information</h3>
+                <div className="grid grid-cols-2 gap-4 text-gray-600">
+                    <p><span className="font-medium">First Name:</span> {vendor.fname}</p>
+                    <p><span className="font-medium">Last Name:</span> {vendor.lname}</p>
+                    <p><span className="font-medium">Email:</span> {vendor.email}</p>
+                    <p><span className="font-medium">Phone No:</span> {vendor.phoneNo}</p>
+                    <p><span className="font-medium">Password:</span> {vendor.pass}</p>
+                </div>
             </div>
-        </div>
 
-        {/* Store Details */}
-        <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">Store Details</h3>
-            <div className="grid grid-cols-2 gap-4 text-gray-600">
-                <p><span className="font-medium">Store Name:</span> {vendor.storeName}</p>
-                <p><span className="font-medium">Description:</span> {vendor.des}</p>
-                <p><span className="font-medium">Business Type:</span> {vendor.btype}</p>
-                <p><span className="font-medium">Address:</span> {vendor.address}</p>
-                <p><span className="font-medium">Tax ID:</span> {vendor.taxid}</p>
+            {/* Store Details */}
+            <div className="mb-6">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Store Details</h3>
+                <div className="grid grid-cols-2 gap-4 text-gray-600">
+                    <p><span className="font-medium">Store Name:</span> {vendor.storeName}</p>
+                    <p><span className="font-medium">Description:</span> {vendor.des}</p>
+                    <p><span className="font-medium">Business Type:</span> {vendor.btype}</p>
+                    <p><span className="font-medium">Address:</span> {vendor.address}</p>
+                    <p><span className="font-medium">Tax ID:</span> {vendor.taxid}</p>
+                </div>
             </div>
-        </div>
 
-        {/* Product Details */}
-        <div className="mb-6">
-            <h3 className="text-xl font-semibold text-gray-700 mb-2">Product Details</h3>
-            <div className="grid grid-cols-2 gap-4 text-gray-600">
-                <p><span className="font-medium">Type of Product:</span> {vendor.typeProduct}</p>
-                <p><span className="font-medium">Number of Products:</span> {vendor.noOfProducts}</p>
-                <p><span className="font-medium">Return Policy:</span> {vendor.returnpolicy}</p>
+            {/* Product Details */}
+            <div className="mb-6">
+                <h3 className="text-xl font-semibold text-gray-700 mb-2">Product Details</h3>
+                <div className="grid grid-cols-2 gap-4 text-gray-600">
+                    <p><span className="font-medium">Type of Product:</span> {vendor.typeProduct}</p>
+                    <p><span className="font-medium">Number of Products:</span> {vendor.noOfProducts}</p>
+                    <p><span className="font-medium">Return Policy:</span> {vendor.returnpolicy}</p>
+                </div>
             </div>
-        </div>
 
-        <button
-        onClick={()=>handleSubmmit(vendor)}
-        className="w-full bg-green-600 text-white font-semibold py-2 rounded-lg hover:bg-green-500 transition-all duration-200">
-            Submit
-        </button>
-    </div>
-)};
+            <button
+                onClick={() => handleSubmit(vendor)}
+                className="w-full bg-green-600 text-white font-semibold py-2 rounded-lg hover:bg-green-500 transition-all duration-200">
+                Submit
+            </button>
+        </div>
+    );
+};
+
 
 
 
